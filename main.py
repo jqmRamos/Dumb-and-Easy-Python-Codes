@@ -30,6 +30,9 @@ def get_stats(class_list):
         new_list.append([index[0], index[1], avg(index[1])])
     return new_list
 def avg(grades):
+    assert not len(grades) == 0, f'No grades data : {grades}'
+    print("Everything Okay\n")
+    return sum(grades)/len(grades)
     try:
         result = sum(grades)/len(grades)
         print("Everything Okay\n")
