@@ -21,7 +21,7 @@ def towers(n, fr, to, spare):
         towers(n-1, fr, spare, to) 
         towers(1, fr, to, spare)
         towers(n-1, spare, to, fr)
-'''
+
 
 def get_stats(class_list):
     new_list = []
@@ -49,3 +49,5 @@ class_list = [
              ]
 
 print(get_stats(class_list))
+'''
+
