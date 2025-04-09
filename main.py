@@ -1,53 +1,42 @@
-'''
-def recursive_way_2Multiply(x, i, result):
-        if i <= 0:
-            return result
-        result += x
-        i = i-1
-        return recursive_way_2Multiply(x, i, result)
-def fact(n):
-      if n == 1:
-        return n
-      return n*fact(n-1)
+import random
+
+random.seed()
 
 
-def printMove(fr, to):
-    print(f"Move from {fr} to {to}")
+class Deck:
+    def __init__(self):
+        #self.number = 1 # 1 to 10 - Jack 8 Queen 9 King 10 
+        #self.suits = [1, 2, 3, 4]# 1- Clubs 2- Spades 3- Diamonds 4- Hearts       
+        self.name = input(f"Your name: ")
+        self.change = random.randrange(1,11) 
+        self.hand = [random.randrange(1,11) for i in range(3)] #Max 3
+        self.points = 0
+        self.rounds = 0
+        print(self.hand)
+        
+    def match(self, other_deck):
+        while(True):
+            try:
+                choose = input(int(f"Choose one of the cards in your hand\n{self.hand}"))
+                for i in range(self.hand):
+                    if choose == self.hand[i]:
+                        self.hand.pop(i)
+                        break
+                other_d_choose = other_deck.hand.pop(random.randrange(0,len(other_d_choose.hand)))
+                win = self.wincondition(choose, other_d_choose)
+                if win == 1:
+                    self.points +=1
+                elif win == 0:
+                    other_deck.points += 1
+                self.rounds +=1
+                if self.rounds >= 3:
+                    return self.winner(self.points, other_d_choose.points)            
+            except: 
+                print("You need to use a number")
+                
+    def wincondition(self, choose, other_d_choose):
+        pass
     
-def towers(n, fr, to, spare):
-    if n == 1:
-        printMove(fr, to)
-    else:
-        towers(n-1, fr, spare, to) 
-        towers(1, fr, to, spare)
-        towers(n-1, spare, to, fr)
-
-
-def get_stats(class_list):
-    new_list = []
-    for index in class_list:
-        print(f'Student: {index[0][0]}')
-        new_list.append([index[0], index[1], avg(index[1])])
-    return new_list
-def avg(grades):
-    assert not len(grades) == 0, f'No grades data : {grades}'
-    print("Everything Okay\n")
-    return sum(grades)/len(grades)
-    try:
-        result = sum(grades)/len(grades)
-        print("Everything Okay\n")
-        return result
-    except ZeroDivisionError:
-        print("Warning! No grades data\n")
-        return 0.0
-
-class_list = [
-              [ ['Peter', 'Parker'], [7.0, 8.0, 8.5]],
-              [ ['Bruce', 'Wayne'], [10.0, 8.0, 7.5]], 
-              [ ["Clark", "Kent"], [2.0, 3.0, 8.5]],
-              [ ["Deadpool"],[]]   
-             ]
-
-print(get_stats(class_list))
-'''
-
+    def winner(self, points, other_points):
+        pass
+Deck()
